@@ -3,13 +3,13 @@ const config = require("./config");
 const { tokenTypes } = require("./tokens");
 const { User } = require("../models");
 
+// TODO: CRIO_TASK_MODULE_AUTH - Set mechanism to retrieve Jwt token from user request
 /**
  * These config options are required
  * Option 1: jwt secret environment variable set in ".env"
  * Option 2: mechanism to fetch jwt token from request Authentication header with the "bearer" auth scheme
  */
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: config.jwt.secret,
 };
 
@@ -26,26 +26,11 @@ const jwtOptions = {
  * @param done - callback function
  */
 const jwtVerify = async (payload, done) => {
-   try{
-    if(payload.type !== tokenTypes.ACCESS){
-      throw new Error('Invalid token type');
-     }
-
-     
-   
-    const user = await User.findById(payload.sub);
-    if(user){
-      return done(null, user);
-    }else
-       return done(null, false);
-   }catch(err){
-    done(err, false);
-   }
 };
 
 // TODO: CRIO_TASK_MODULE_AUTH - Uncomment below lines of code once the "jwtVerify" and "jwtOptions" are implemented
-const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);
+// const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);
 
-module.exports = {
-  jwtStrategy,
-};
+// module.exports = {
+//   jwtStrategy,
+// };
