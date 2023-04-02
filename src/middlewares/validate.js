@@ -7,7 +7,7 @@ const ApiError = require("../utils/ApiError");
  *  Middleware function that validates user requests against a Joi schema
  *
  */
-const validate = (schema) => (req, res, next) => {
+const   validate = (schema) => (req, res, next) => {
   // Request body should be JSON, if present
   if (Object.keys(req.body).length !== 0 && !req.is("application/json")) {
     return next(
