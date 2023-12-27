@@ -30,7 +30,8 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
     sub: userId,
     type: type,
     exp: expires,
-    iat:Date.now()/1000,
+    // iat:Date.now()/1000,
+    type,
   };
   const jwtToken = jwt.sign(payload, secret);
   // console.log(jwtToken);
